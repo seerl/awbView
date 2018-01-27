@@ -1,0 +1,8 @@
+{
+    "name": "sebastian/awbtoday",
+    "type": "project",
+    "require": {
+        "skyscanner/jsonpath": "dev-master"
+    },
+    "minimum-stability": "stable"
+}
