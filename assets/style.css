@@ -1,0 +1,16 @@
+span.heading {
+	color: #def;
+	font-size: 14px;
+	font-family: roboto;
+	display: block;
+	text-align: center;
+}
+
+span.tonne {
+	color: #0db9f0;
+	display: block;
+	text-align: center;
+	font-family: roboto;
+	margin-top: 10px;
+	font-size: 20px;
+}

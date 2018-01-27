@@ -11,11 +11,16 @@ namespace AwbToday;
 require __DIR__ . '/vendor/autoload.php';
 use JsonPath\JsonObject;
 
+setlocale(LC_ALL, "de_DE");
 
 class awbView
 {
     function showDay(int $day, int $month, int $year)
     {
+    	$this->day = $day; 
+    	$this->month = $month;
+    	$this->year = $year;
+
         if (!$json = file_get_contents('assets/calendar.json')) exit("Error: Cannot read json file.");
 		$json = json_decode($json);
 		$jsonObject = new JsonObject($json);
@@ -32,14 +37,32 @@ class awbView
     		elseif ($item == 'wertstoff') $returnArray[] = 'Gelbe';
     		else $returnArray[] = 'unbekannt';
     	}
+    	$this->tons = $returnArray;
     	return $returnArray;
+    }
+
+    function renderView() {
+    	$date = $this->day.'.'.$this->month.'.'.$this->year;
+    	$dayOfWeek = date('l', strtotime($date));
+    	$html = '<span class="heading">Müll: '.$dayOfWeek." (".$date.")".'</span>';
+    	$html .= '<span class="tonne">';
+    	if ($this->tons)
+    		foreach ($this->tons as $ton) {
+    			$html .= $ton."<br/>";
+    		} else {
+    			//do nothing, leave empty
+    		}
+    		$html .= "</span>";
+    	echo '<html><head><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"></head><body><div class="box-content dummy">'.$html.'</div></body></html>';
     }
 }
 
 
 $view = new awbView;
-$return = $view->showDay(7,2,2018);
-print_r($return);
+$tomorrow = time() + 60 * 60 * 24;
+//$return = $view->showDay(date('d',$tomorrow),date('m',$tomorrow),date('Y',$tomorrow));
+$return = $view->showDay(7,2,date('Y',$tomorrow));
+$view->renderView();
 
 
 ?>
