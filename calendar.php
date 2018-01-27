@@ -1,8 +1,13 @@
 <?php
 
-//https://www.awbkoeln.de/api/calendar?building_number=28&street_code=6057&start_year=2018&end_year=2018&start_month=1&end_month=12&form=json
+// Get your URL with Street from https://www.awbkoeln.de/abfuhrkalender/ and 
+// look for calendar? URL Request (Chrome F12 :)
 
-namespace AwbTotay;
+// STREET_ID = StreetID from https://wiki.openstreetmap.org/wiki/Cologne/Stra%C3%9Fenverzeichnis
+// HNR = Hausnummer :)
+//https://www.awbkoeln.de/api/calendar?building_number=HNR&street_code=STREET_ID&start_year=2018&end_year=2018&start_month=1&end_month=12&form=json
+
+namespace AwbToday;
 require __DIR__ . '/vendor/autoload.php';
 use JsonPath\JsonObject;
 
